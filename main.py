@@ -33,6 +33,7 @@ def main():
         screen.fill("black")  # Fill the screen with black
 
         player.draw(screen) # Draw the player
+        player.update(dt)   # Update the player
 
         pygame.display.flip()  # Update the full display Surface to the screen
 
