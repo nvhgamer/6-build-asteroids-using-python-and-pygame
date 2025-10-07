@@ -19,6 +19,11 @@ def main():
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updateable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     # Main game loop
@@ -32,15 +37,15 @@ def main():
         # screen.fill((0, 0, 0))  # Fill the screen with black
         screen.fill("black")  # Fill the screen with black
 
-        player.draw(screen) # Draw the player
-        player.update(dt)   # Update the player
+        updateable.update(dt)   # Update all updateable sprites
+
+        for sprite in drawable:
+            sprite.draw(screen)  # Draw the sprite
 
         pygame.display.flip()  # Update the full display Surface to the screen
 
         delta_time = clock.tick(60)  # Cap the frame rate at 60 FPS
         dt = delta_time / 1000  # Delta time in seconds
-
-    pygame.quit()
 
 if __name__ == "__main__":
     main()
